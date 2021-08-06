@@ -11,7 +11,6 @@ import java.util.*
 class MainActivity: Activity() {
     private var dice: ImageView? = null
     private var counter: Int = 0
-    
 
     val imageArray: IntArray = intArrayOf(
         R.drawable.dice_1,
@@ -45,7 +44,6 @@ class MainActivity: Activity() {
                 }
             }
         }, 0, 100)
-
     }
 }
 
