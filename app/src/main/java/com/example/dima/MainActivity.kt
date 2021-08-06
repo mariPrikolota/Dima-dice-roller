@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import java.util.*
 
+
 class MainActivity: Activity() {
     var dice:ImageView? = null
     var counter:Int = 0
@@ -22,26 +23,38 @@ class MainActivity: Activity() {
         setContentView(R.layout.activity_main)
         dice=findViewById(R.id.imageView)
 
+
+
     }
     fun onClikStart(view: View) {
             start()
+
     }
 
     fun start(){
+
         timer = Timer()
         timer?.schedule(object: TimerTask(){
             override fun run() {
+                runOnUiThread {
                 dice?.setImageResource(imageArray[counter])
                 counter++
                 if (counter == 6) {
+                    val randomImage = imageArray.random()
                     counter = 0
+                    dice?.setImageResource(randomImage)
                     timer?.cancel()
+                   }
                 }
             }
-        },0,1000)
+        },0,500)
+
+        }
     }
 
-}
+
+
+
 
 
 
