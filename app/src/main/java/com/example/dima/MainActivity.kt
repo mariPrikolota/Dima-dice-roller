@@ -8,17 +8,21 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import java.util.*
 
+enum class ButtonState {
+    IsStoped, IsStarted, IsHidden
+}
 
-class MainActivity: Activity() {
+class MainActivity : Activity() {
     private var dice: ImageView? = null
     private var dice1: ImageView? = null
-    private var shkala: ImageView? = null
-    private var itsRun = false
-    private var counter: Int = 0
-    private var counter1: Int = 0
-    private val timer1 = Timer()
+    private var progress: ImageView? = null
 
-    val imageArray: IntArray = intArrayOf(
+    private var progressLavel = 0
+    private var progressIsGrowing = true
+    private var progressTimer = Timer()
+    private var buttonState = ButtonState.IsStoped
+
+    private val imageArray: IntArray = intArrayOf(
         R.drawable.dice_1,
         R.drawable.dice_2,
         R.drawable.dice_3,
@@ -26,7 +30,8 @@ class MainActivity: Activity() {
         R.drawable.dice_5,
         R.drawable.dice_6
     )
-    val imageArray1: IntArray = intArrayOf(
+
+    private val imageArray1: IntArray = intArrayOf(
         R.drawable.shkala1,
         R.drawable.shkala2,
         R.drawable.shkala3,
@@ -38,64 +43,86 @@ class MainActivity: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         dice = findViewById(R.id.diceView)
         dice1 = findViewById(R.id.diceView1)
-        shkala = findViewById(R.id.shkalaView)
-
+        progress = findViewById(R.id.shkalaView)
     }
 
-    fun onClikStart(view: View) {
-
-        view as ImageButton
-        if (!itsRun) {
-            start()
-            view.setImageResource(R.drawable.rull)
-            itsRun = true
-        } else  {
-            view.isVisible = false
-            timer1.cancel()
-            view.setImageResource(R.drawable.start_1)
-            rull()
-            itsRun = false
-            view.isVisible = true
-
+    fun onClickStart(view: View) {
+        when (buttonState) {
+            ButtonState.IsStoped -> {
+                startProgressLoading()
+                setupButton(ButtonState.IsStarted)
+            }
+            ButtonState.IsStarted -> {
+                setupButton(ButtonState.IsHidden)
+                progressTimer.cancel()
+                throwDices(progressLavel)
+                progressLavel = 0
+                progressIsGrowing = true
+            }
+            ButtonState.IsHidden -> println("Current state isHidden")
         }
     }
 
-    fun start(){
-        timer1.schedule(
+    private fun startProgressLoading() {
+        progressTimer = Timer()
+
+        progressTimer.schedule(
             object : TimerTask() {
                 override fun run() {
                     runOnUiThread {
-                        shkala?.setImageResource(imageArray1[counter1])
-                        counter1++
-                        if (counter1 == 6) counter1 = 0
+                        if (progressLavel == 5) progressIsGrowing = false
+                        if (progressLavel == 0) progressIsGrowing = true
+                        if (progressIsGrowing) progressLavel++ else progressLavel--
+                        progress?.setImageResource(imageArray1[progressLavel])
                     }
                 }
             },
             0,
-            400
+            500
         )
     }
 
-         fun rull() {
-             val timer = Timer()
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    runOnUiThread {
-                        dice?.setImageResource(imageArray.random())
-                        dice1?.setImageResource(imageArray.random())
-                        counter ++
-                        if (counter == counter1 ) {
-                            counter = 0
-                            timer.cancel()
-                        }
+    private fun throwDices(lavelOfPower: Int) {
+        throwDice(dice, lavelOfPower)
+        throwDice(dice1, lavelOfPower)
+    }
+
+    private fun throwDice(dice: ImageView?, lavelOfPower: Int) {
+        val timer = Timer()
+        var counter = 0
+
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                runOnUiThread {
+                    if (counter == lavelOfPower) {
+                        timer.cancel()
+                        setupButton(ButtonState.IsStoped)
                     }
+                    dice?.setImageResource(imageArray.random())
+                    counter++
                 }
-            }, 0, 500)
+            }
+        }, 0, 150)
+    }
+
+    private fun setupButton(state: ButtonState) {
+        val imageButton = findViewById<ImageButton>(R.id.imageButton)
+
+        when (state) {
+            ButtonState.IsStoped -> {
+                imageButton.setImageResource(R.drawable.start_1)
+                imageButton.isVisible = true
+            }
+            ButtonState.IsStarted -> imageButton.setImageResource(R.drawable.rull)
+            ButtonState.IsHidden -> imageButton.isVisible = false
         }
 
+        buttonState = state
     }
+}
 
 
 
