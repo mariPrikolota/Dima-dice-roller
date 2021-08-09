@@ -4,31 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@android:color/holo_orange_dark"
     android:onClick="onClikStart"
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/diceView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/diceView1"
+        android:layout_width="184dp"
+        android:layout_height="210dp"
         android:padding="40dp"
-        android:layout_marginTop="108dp"
+        android:src="@drawable/dice_1"
+        app:layout_constraintBottom_toBottomOf="@+id/diceView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/diceView"
+        app:layout_constraintTop_toTopOf="@+id/diceView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/diceView"
+        android:layout_width="184dp"
+        android:layout_height="212dp"
+        android:layout_marginTop="160dp"
+        android:padding="40dp"
         android:src="@drawable/dice_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="204dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:background="@color/material_on_surface_stroke"
         android:onClick="onClikStart"
-        android:src="@drawable/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/start_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/diceView1"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@+id/diceView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.863" />
+
+    <ImageView
+        android:id="@+id/shkalaView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/shkala1"
+        app:layout_constraintEnd_toEndOf="@+id/diceView1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/diceView"
         app:layout_constraintTop_toBottomOf="@+id/diceView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
