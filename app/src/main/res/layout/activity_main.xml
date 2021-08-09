@@ -35,6 +35,7 @@
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:background="@color/material_on_surface_stroke"
+        android:onClick="onClickStart"
         android:scaleType="fitCenter"
         android:src="@drawable/start_1"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -2,6 +2,7 @@ package com.example.dima
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.view.isVisible
@@ -15,7 +16,6 @@ class MainActivity : Activity() {
     private var dice: ImageView? = null
     private var dice1: ImageView? = null
     private var progress: ImageView? = null
-    private var imageButton: ImageButton? = null
 
     private var progressLavel = 0
     private var progressIsGrowing = true
@@ -47,23 +47,22 @@ class MainActivity : Activity() {
         dice = findViewById(R.id.diceView)
         dice1 = findViewById(R.id.diceView1)
         progress = findViewById(R.id.shkalaView)
+    }
 
-        imageButton = findViewById(R.id.imageButton)
-        imageButton?.setOnClickListener {
-            when (buttonState) {
-                ButtonState.IsStoped -> {
-                    startProgressLoading()
-                    setupButton(ButtonState.IsStarted)
-                }
-                ButtonState.IsStarted -> {
-                    setupButton(ButtonState.IsHidden)
-                    progressTimer.cancel()
-                    throwDices(progressLavel)
-                    progressLavel = 0
-                    progressIsGrowing = true
-                }
-                ButtonState.IsHidden -> println("Current state isHidden")
+    fun onClickStart(view: View) {
+        when (buttonState) {
+            ButtonState.IsStoped -> {
+                startProgressLoading()
+                setupButton(ButtonState.IsStarted)
             }
+            ButtonState.IsStarted -> {
+                setupButton(ButtonState.IsHidden)
+                progressTimer.cancel()
+                throwDices(progressLavel)
+                progressLavel = 0
+                progressIsGrowing = true
+            }
+            ButtonState.IsHidden -> println("Current state isHidden")
         }
     }
 
@@ -110,13 +109,15 @@ class MainActivity : Activity() {
     }
 
     private fun setupButton(state: ButtonState) {
+        val imageButton = findViewById<ImageButton>(R.id.imageButton)
+
         when (state) {
             ButtonState.IsStoped -> {
-                imageButton?.setImageResource(R.drawable.start_1)
-                imageButton?.isVisible = true
+                imageButton.setImageResource(R.drawable.start_1)
+                imageButton.isVisible = true
             }
-            ButtonState.IsStarted -> imageButton?.setImageResource(R.drawable.rull)
-            ButtonState.IsHidden -> imageButton?.isVisible = false
+            ButtonState.IsStarted -> imageButton.setImageResource(R.drawable.rull)
+            ButtonState.IsHidden -> imageButton.isVisible = false
         }
 
         buttonState = state
