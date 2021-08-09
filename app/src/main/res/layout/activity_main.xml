@@ -5,31 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_orange_dark"
-    android:onClick="onClikStart"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/diceView1"
         android:layout_width="184dp"
         android:layout_height="210dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:padding="40dp"
         android:src="@drawable/dice_1"
-        app:layout_constraintBottom_toBottomOf="@+id/diceView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/diceView"
-        app:layout_constraintTop_toTopOf="@+id/diceView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/diceView" />
 
     <ImageView
         android:id="@+id/diceView"
         android:layout_width="184dp"
-        android:layout_height="212dp"
-        android:layout_marginTop="160dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
         android:padding="40dp"
         android:src="@drawable/dice_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +35,6 @@
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:background="@color/material_on_surface_stroke"
-        android:onClick="onClikStart"
         android:scaleType="fitCenter"
         android:src="@drawable/start_1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,8 +48,9 @@
         android:id="@+id/shkalaView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/shkala1"
         app:layout_constraintEnd_toEndOf="@+id/diceView1"
         app:layout_constraintHorizontal_bias="0.0"
