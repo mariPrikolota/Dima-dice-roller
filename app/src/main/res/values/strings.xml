@@ -3,5 +3,5 @@
     <string name="one_dice">Один кубик</string>
     <string name="two_dice">Два кубика</string>
     <string name="razrab">Разработчики</string>
-
+    <string name="menu_title">Меню игры</string>
 </resources>

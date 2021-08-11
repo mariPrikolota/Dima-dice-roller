@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/id_one_dice"
@@ -15,7 +16,6 @@
             android:id="@+id/id_razrab"
             android:icon="@drawable/ic_action_name"
             android:title="@string/razrab" />
-
     </group>
 
 </menu>
