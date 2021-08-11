@@ -6,18 +6,19 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-enum class ButtonState {
+enum class ButtonState2 {
     IsStoped, IsStarted, IsHidden
 }
 
-class MainActivity : Activity() {
+class MainActivity2 : Activity() {
+    private var dice: ImageView? = null
+    private var progress: ImageView? = null
     private var progressLavel = 0
     private var progressIsGrowing = true
     private var progressTimer = Timer()
-    private var buttonState = ButtonState.IsStoped
+    private var buttonState = ButtonState2.IsStoped
 
     private val imageArray: IntArray = intArrayOf(
         R.drawable.dice_1,
@@ -39,23 +40,26 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
+
+        dice = findViewById(R.id.diceView3)
+        progress = findViewById(R.id.shkalaView2)
     }
 
     fun onClickStart(view: View) {
         when (buttonState) {
-            ButtonState.IsStoped -> {
+            ButtonState2.IsStoped -> {
                 startProgressLoading()
-                setupButton(ButtonState.IsStarted)
+                setupButton(ButtonState2.IsStarted)
             }
-            ButtonState.IsStarted -> {
-                setupButton(ButtonState.IsHidden)
+            ButtonState2.IsStarted -> {
+                setupButton(ButtonState2.IsHidden)
                 progressTimer.cancel()
                 throwDices(progressLavel)
                 progressLavel = 0
                 progressIsGrowing = true
             }
-            ButtonState.IsHidden -> println("Current state isHidden")
+            ButtonState2.IsHidden -> println("Current state isHidden")
         }
     }
 
@@ -69,7 +73,7 @@ class MainActivity : Activity() {
                         if (progressLavel == 5) progressIsGrowing = false
                         if (progressLavel == 0) progressIsGrowing = true
                         if (progressIsGrowing) progressLavel++ else progressLavel--
-                        shkalaView?.setImageResource(imageArray1[progressLavel])
+                        progress?.setImageResource(imageArray1[progressLavel])
                     }
                 }
             },
@@ -79,8 +83,7 @@ class MainActivity : Activity() {
     }
 
     private fun throwDices(lavelOfPower: Int) {
-        throwDice(diceView, lavelOfPower)
-        throwDice(diceView1, lavelOfPower)
+        throwDice(dice, lavelOfPower)
     }
 
     private fun throwDice(dice: ImageView?, lavelOfPower: Int) {
@@ -92,7 +95,7 @@ class MainActivity : Activity() {
                 runOnUiThread {
                     if (counter == lavelOfPower) {
                         timer.cancel()
-                        setupButton(ButtonState.IsStoped)
+                        setupButton(ButtonState2.IsStoped)
                     }
                     dice?.setImageResource(imageArray.random())
                     counter++
@@ -101,25 +104,18 @@ class MainActivity : Activity() {
         }, 0, 150)
     }
 
-    private fun setupButton(state2: ButtonState) {
-        val imageButton = findViewById<ImageButton>(R.id.imageButton)
+    private fun setupButton(state: ButtonState2) {
+        val imageButton = findViewById<ImageButton>(R.id.imageButton2)
 
-        when (state2) {
-            ButtonState.IsStoped -> {
+        when (state) {
+            ButtonState2.IsStoped -> {
                 imageButton.setImageResource(R.drawable.start_1)
                 imageButton.isVisible = true
             }
-            ButtonState.IsStarted -> imageButton.setImageResource(R.drawable.rull)
-            ButtonState.IsHidden -> imageButton.isVisible = false
+            ButtonState2.IsStarted -> imageButton.setImageResource(R.drawable.rull)
+            ButtonState2.IsHidden -> imageButton.isVisible = false
         }
 
-        buttonState = state2
+        buttonState = state
     }
 }
-
-
-
-
-
-
-

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dima</string>
+    <string name="one_dice">Один кубик</string>
+    <string name="two_dice">Два кубика</string>
+    <string name="razrab">Разработчики</string>
+
 </resources>
