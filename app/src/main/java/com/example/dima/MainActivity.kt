@@ -14,10 +14,6 @@ enum class ButtonState {
 }
 
 class MainActivity : Activity() {
-    private var dice: ImageView? = null
-    private var dice1: ImageView? = null
-    private var progress: ImageView? = null
-
     private var progressLavel = 0
     private var progressIsGrowing = true
     private var progressTimer = Timer()
@@ -44,10 +40,6 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        dice = findViewById(R.id.diceView)
-        dice1 = findViewById(R.id.diceView1)
-        progress = findViewById(R.id.shkalaView)
     }
 
     fun onClickStart(view: View) {
@@ -77,7 +69,7 @@ class MainActivity : Activity() {
                         if (progressLavel == 5) progressIsGrowing = false
                         if (progressLavel == 0) progressIsGrowing = true
                         if (progressIsGrowing) progressLavel++ else progressLavel--
-                        progress?.setImageResource(imageArray1[progressLavel])
+                        shkalaView?.setImageResource(imageArray1[progressLavel])
                     }
                 }
             },
@@ -87,8 +79,8 @@ class MainActivity : Activity() {
     }
 
     private fun throwDices(lavelOfPower: Int) {
-        throwDice(dice, lavelOfPower)
-        throwDice(dice1, lavelOfPower)
+        throwDice(diceView, lavelOfPower)
+        throwDice(diceView1, lavelOfPower)
     }
 
     private fun throwDice(dice: ImageView?, lavelOfPower: Int) {
