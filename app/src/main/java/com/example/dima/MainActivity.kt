@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 enum class ButtonState {
