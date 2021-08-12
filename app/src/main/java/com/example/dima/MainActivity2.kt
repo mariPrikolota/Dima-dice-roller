@@ -1,7 +1,9 @@
 package com.example.dima
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -12,7 +14,7 @@ enum class ButtonState2 {
     IsStoped, IsStarted, IsHidden
 }
 
-class MainActivity2 : Activity() {
+class MainActivity2 : Activity(){
     private var dice: ImageView? = null
     private var progress: ImageView? = null
     private var progressLavel = 0
@@ -118,4 +120,11 @@ class MainActivity2 : Activity() {
 
         buttonState = state
     }
+
+    fun onClicRun1(view: View){
+        val i =Intent(this,MenuActivity::class.java)
+        finish()
+    }
+
+
 }

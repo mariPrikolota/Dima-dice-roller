@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/id_one_dice"
-            android:icon="@drawable/dice_1"
+            android:icon="@drawable/menudice1"
             android:title="@string/one_dice" />
         <item
             android:id="@+id/id_two_dice"
-            android:icon="@drawable/dice1_2"
+            android:icon="@drawable/menudice"
             android:title="@string/two_dice" />
         <item
             android:id="@+id/id_razrab"

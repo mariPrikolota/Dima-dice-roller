@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.dima
 
 import android.content.Intent
@@ -17,18 +19,21 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         menuDice.setNavigationItemSelectedListener(this)
     }
 
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
             R.id.id_one_dice -> {
                 val intent1 = Intent(this, MainActivity2::class.java)
-                startActivity(intent1)
+                    startActivityForResult(intent1,1)
+
             }
             R.id.id_two_dice ->{
                 val intent2 = Intent(this, MainActivity::class.java)
-                startActivity(intent2)
+                startActivityForResult(intent2,2)
             }
         }
         return true
     }
+
 }

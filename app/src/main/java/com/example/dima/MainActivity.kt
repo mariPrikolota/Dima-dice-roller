@@ -1,6 +1,7 @@
 package com.example.dima
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -114,6 +115,11 @@ class MainActivity : Activity() {
         }
 
         buttonState = state2
+    }
+
+    fun onClicRun(view: View){
+        val i =Intent(this,MenuActivity::class.java)
+        finish()
     }
 }
 
