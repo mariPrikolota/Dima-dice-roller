@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="dice_images">
+        <item>@drawable/dice_1</item>
+        <item>@drawable/dice_2</item>
+        <item>@drawable/dice_3</item>
+        <item>@drawable/dice_4</item>
+        <item>@drawable/dice_5</item>
+        <item>@drawable/dice_6</item>
+    </array>
+
+    <array name="progress_images">
+        <item>@drawable/shkala1</item>
+        <item>@drawable/shkala2</item>
+        <item>@drawable/shkala3</item>
+        <item>@drawable/shkala4</item>
+        <item>@drawable/shkala5</item>
+        <item>@drawable/shkala6</item>
+    </array>
+</resources>
