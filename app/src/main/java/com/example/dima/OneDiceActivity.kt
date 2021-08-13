@@ -1,20 +1,22 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.dima
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.one_dice_activity.*
+import kotlinx.android.synthetic.main.one_dice_menu.*
 import java.util.*
 
-enum class ButtonState {
-    IsStoped, IsStarted, IsHidden
-}
-
-class MainActivity : Activity() {
+class OneDiceActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var progressLavel = 0
     private var progressIsGrowing = true
     private var progressTimer = Timer()
@@ -40,7 +42,9 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.one_dice_menu)
+
+        menuOneDice.setNavigationItemSelectedListener(this)
     }
 
     fun onClickStart(view: View) {
@@ -70,7 +74,7 @@ class MainActivity : Activity() {
                         if (progressLavel == 5) progressIsGrowing = false
                         if (progressLavel == 0) progressIsGrowing = true
                         if (progressIsGrowing) progressLavel++ else progressLavel--
-                        shkalaView?.setImageResource(imageArray1[progressLavel])
+                        shkalaView2?.setImageResource(imageArray1[progressLavel])
                     }
                 }
             },
@@ -80,8 +84,7 @@ class MainActivity : Activity() {
     }
 
     private fun throwDices(lavelOfPower: Int) {
-        throwDice(diceView, lavelOfPower)
-        throwDice(diceView1, lavelOfPower)
+        throwDice(diceView3, lavelOfPower)
     }
 
     private fun throwDice(dice: ImageView?, lavelOfPower: Int) {
@@ -102,10 +105,10 @@ class MainActivity : Activity() {
         }, 0, 150)
     }
 
-    private fun setupButton(state2: ButtonState) {
-        val imageButton = findViewById<ImageButton>(R.id.imageButton)
+    private fun setupButton(state: ButtonState) {
+        val imageButton = findViewById<ImageButton>(R.id.imageButton2)
 
-        when (state2) {
+        when (state) {
             ButtonState.IsStoped -> {
                 imageButton.setImageResource(R.drawable.start_1)
                 imageButton.isVisible = true
@@ -114,18 +117,24 @@ class MainActivity : Activity() {
             ButtonState.IsHidden -> imageButton.isVisible = false
         }
 
-        buttonState = state2
+        buttonState = state
     }
 
-    fun onClicRun(view: View){
-        val i =Intent(this,MenuActivity::class.java)
+    fun onClicRun1(view: View){
+        val i =Intent(this,OneDiceActivity::class.java)
         finish()
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.id_two_dice -> {
+                val intent2 = Intent(this, TwoDicesActivity::class.java)
+                startActivityForResult(intent2, 2)
+            }
+        }
+
+        one_dice_menu_drawer_layout.closeDrawer(GravityCompat.START)
+
+        return true
+    }
 }
-
-
-
-
-
-
-
