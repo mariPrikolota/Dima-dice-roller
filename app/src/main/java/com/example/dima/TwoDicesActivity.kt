@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.dima
 
 import android.content.Intent
@@ -12,6 +14,7 @@ import androidx.core.view.isVisible
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.two_dices_menu.*
 import kotlinx.android.synthetic.main.two_dices_activity.*
+import kotlinx.android.synthetic.main.two_dices_menu.two_dices_menu_drawer_layout
 import java.util.*
 
 class TwoDicesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -54,7 +57,10 @@ class TwoDicesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             ButtonState.IsStarted -> {
                 setupButton(ButtonState.IsHidden)
                 progressTimer.cancel()
-                throwDices(progressLavel)
+                throwDices(progressLavel) {
+                    setupButton(ButtonState.IsStoped)
+                }
+
                 progressLavel = 0
                 progressIsGrowing = true
             }
@@ -81,27 +87,11 @@ class TwoDicesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         )
     }
 
-    private fun throwDices(lavelOfPower: Int) {
-        throwDice(diceView, lavelOfPower)
-        throwDice(diceView1, lavelOfPower)
-    }
+    private fun throwDices(lavelOfPower: Int, comletion: () -> Unit) {
+        val diceManager = DiceManager()
 
-    private fun throwDice(dice: ImageView?, lavelOfPower: Int) {
-        val timer = Timer()
-        var counter = 0
-
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                runOnUiThread {
-                    if (counter == lavelOfPower) {
-                        timer.cancel()
-                        setupButton(ButtonState.IsStoped)
-                    }
-                    dice?.setImageResource(imageArray.random())
-                    counter++
-                }
-            }
-        }, 0, 150)
+        diceManager.throwDice(diceView, lavelOfPower, comletion)
+        diceManager.throwDice(diceView1, lavelOfPower, comletion)
     }
 
     private fun setupButton(state2: ButtonState) {
@@ -120,16 +110,21 @@ class TwoDicesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     fun onClicRun(view: View){
-        val i = Intent(this,OneDiceActivity::class.java)
+//        val i = Intent(this,OneDiceActivity::class.java)
         finish()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.id_one_dice -> {
-                val intent1 = Intent(this, OneDiceActivity::class.java)
-                startActivityForResult(intent1, 1)
+                val intent = Intent(this, OneDiceActivity::class.java)
+                startActivityForResult(intent, 2)
             }
+            R.id.id_razrab -> {
+                val intent = Intent(this, DevelopersActivity::class.java)
+                startActivityForResult(intent, 2)
+            }
+            else -> println("Another menu item")
         }
 
         two_dices_menu_drawer_layout.closeDrawer(GravityCompat.START)

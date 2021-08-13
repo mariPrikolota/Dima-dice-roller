@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
@@ -56,7 +55,9 @@ class OneDiceActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             ButtonState.IsStarted -> {
                 setupButton(ButtonState.IsHidden)
                 progressTimer.cancel()
-                throwDices(progressLavel)
+                DiceManager().throwDice(diceView3, progressLavel) {
+                    setupButton(ButtonState.IsStoped)
+                }
                 progressLavel = 0
                 progressIsGrowing = true
             }
@@ -83,28 +84,6 @@ class OneDiceActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         )
     }
 
-    private fun throwDices(lavelOfPower: Int) {
-        throwDice(diceView3, lavelOfPower)
-    }
-
-    private fun throwDice(dice: ImageView?, lavelOfPower: Int) {
-        val timer = Timer()
-        var counter = 0
-
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                runOnUiThread {
-                    if (counter == lavelOfPower) {
-                        timer.cancel()
-                        setupButton(ButtonState.IsStoped)
-                    }
-                    dice?.setImageResource(imageArray.random())
-                    counter++
-                }
-            }
-        }, 0, 150)
-    }
-
     private fun setupButton(state: ButtonState) {
         val imageButton = findViewById<ImageButton>(R.id.imageButton2)
 
@@ -121,16 +100,21 @@ class OneDiceActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun onClicRun1(view: View){
-        val i =Intent(this,OneDiceActivity::class.java)
+//        val i = Intent(this,OneDiceActivity::class.java)
         finish()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.id_two_dice -> {
-                val intent2 = Intent(this, TwoDicesActivity::class.java)
-                startActivityForResult(intent2, 2)
+                val intent = Intent(this, TwoDicesActivity::class.java)
+                startActivityForResult(intent, 2)
             }
+            R.id.id_razrab -> {
+                val intent = Intent(this, DevelopersActivity::class.java)
+                startActivityForResult(intent, 2)
+            }
+            else -> println("Another menu item")
         }
 
         one_dice_menu_drawer_layout.closeDrawer(GravityCompat.START)

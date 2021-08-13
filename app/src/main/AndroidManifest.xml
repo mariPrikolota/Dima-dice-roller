@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dima">
+        <activity android:name=".DevelopersActivity" />
         <activity android:name=".TwoDicesActivity" />
         <activity android:name=".OneDiceActivity">
             <intent-filter>
