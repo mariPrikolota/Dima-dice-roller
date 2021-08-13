@@ -4,15 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.23072916666666668" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.27699530516431925" />
-        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.21195652173913043" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.21458333333333332" />
-        <entry key="app/src/main/res/layout/developers_activity.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/header_main_menu.xml" value="0.21458333333333332" />
-        <entry key="app/src/main/res/layout/one_dice_activity.xml" value="0.21195652173913043" />
-        <entry key="app/src/main/res/layout/one_dice_menu.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/two_dice_activity.xml" value="0.21195652173913043" />
-        <entry key="app/src/main/res/layout/two_dices_menu.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/menu/dice_menu.xml" value="0.55" />
       </map>
     </option>
