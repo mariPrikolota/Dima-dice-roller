@@ -23,14 +23,14 @@ class TwoDicesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private var progressTimer = Timer()
     private var buttonState = ButtonState.IsStoped
 
-    private val imageArray: IntArray = intArrayOf(
-        R.drawable.dice_1,
-        R.drawable.dice_2,
-        R.drawable.dice_3,
-        R.drawable.dice_4,
-        R.drawable.dice_5,
-        R.drawable.dice_6
-    )
+//    private val imageArray: IntArray = intArrayOf(
+//        R.drawable.dice_1,
+//        R.drawable.dice_2,
+//        R.drawable.dice_3,
+//        R.drawable.dice_4,
+//        R.drawable.dice_5,
+//        R.drawable.dice_6
+//    )
 
     private val imageArray1: IntArray = intArrayOf(
         R.drawable.shkala1,
@@ -110,8 +110,9 @@ class TwoDicesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     fun onClicRun(view: View){
-//        val i = Intent(this,OneDiceActivity::class.java)
-        finish()
+        val intent = Intent(this, TitleActivity::class.java)
+        startActivity(intent)
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

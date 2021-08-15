@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/header"
-    android:background="@android:color/holo_blue_dark">
+    android:background="@android:color/holo_orange_dark">
 
     <TextView
         android:id="@+id/textView"
@@ -12,6 +12,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/menu_title"
         android:textColor="@color/black"
+        android:textFontWeight="@integer/material_motion_duration_short_1"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
